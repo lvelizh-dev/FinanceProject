@@ -1,0 +1,62 @@
+
+<!-- 
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <h2>Seleccione el tipo de usuario</h2>
+    </div>
+</div> -->
+<p class="text-center">Seleccione el tipo de usuario</p>
+<br>
+
+<div class="row">
+    <div class="col-md-4 mx-auto">
+<div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" [(ngModel)] = "user.userType"  id="inlineRadio1" value="1" style="margin-left: 80px;" checked>
+    <label class="form-check-label" for="inlineRadio1">Emisor</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions"  [(ngModel)] = "user.userType" id="inlineRadio2" value="2"style="margin-left: 10px">
+    <label class="form-check-label" for="inlineRadio2">Bonista</label>
+  </div>
+</div>
+</div>
+
+<br>
+<br>
+<br>
+
+
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <div class="card">
+            <div class="card-header"  style="background-color: #008CBC; color:white">
+                Registro
+            </div>
+            <div class="card-body">
+                <form (submit)="signUp()" class="needs-validation" novalidate>
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="user.email"  name="email" class="form-control" placeholder="Usuario" required="true" autofocus>
+                        <div class="invalid-feedback">
+                            Por favor ingrese un usuario
+                          </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Password" required="true">
+                        <div class="invalid-feedback">
+                            Por favor ingrese una contraseña
+                          </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Registrarse
+                    </button>
+                    <input type="hidden" name="userType" #userType="ngModel" [(ngModel)] = "user.userType">
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

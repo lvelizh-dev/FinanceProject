@@ -1,0 +1,68 @@
+
+<h2>Inflaciones</h2>
+<form (ngSubmit)="onSubmit()">
+    <div class="container">
+        <!-- <form #bonoForm="ngForm" (ngSubmit)="addBono(bonoForm)"> -->
+
+        <div class="form-row" *ngFor="let obj of arrInflation; let i=index">
+            <input type="hidden" name="_id" #id="ngModel" [(ngModel)] = "obj._id">
+            <div class="form-group col-md-4">
+                <label>Inflación</label>
+                <input type="number" class="form-control" name="name{{i}}" [(ngModel)]="obj.inflation">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Año</label>
+                <input type="number" class="form-control" name="year{{i}}" [(ngModel)]="obj.year">
+            </div>
+            <div class="form-group col-md-2" style="top: 28px;">
+                <span (click)="removeForm(i, obj._id)" class="btn btn-danger">-</span>
+            </div>
+        </div>
+        <span (click)="addInflationForm()" class="btn btn-succes">Añadir Inflación</span>
+        <button class="btn btn-primary">Guardar</button>
+    </div>
+</form>
+<br>
+
+<h2>Períodos de gracia</h2>
+<form (ngSubmit)="onSubmitGracePeriod()">
+    <div class="container">
+        <div class="form-row" *ngFor="let obj of arrGracePeriod; let i=index">
+            <input type="hidden" name="_id" #id="ngModel" [(ngModel)] = "obj._id">
+
+            <div class="form-group col-md-4">
+                <label>Tipo</label>
+                <div class="col-sm-4">
+                    <select class="form-control" name="tipo{{i}}" [(ngModel)]="obj.tipo" >
+                      <option>S</option>
+                      <option>T</option>
+                      <option>P</option>
+                    </select>
+                  </div>
+                <!-- <input type="text" class="form-control" name="tipo{{i}}" [(ngModel)]="obj.tipo"> -->
+            </div>
+            <div class="form-group col-md-4">
+                <label>Cuota</label>
+                <input type="number" class="form-control" name="cuota{{i}}" [(ngModel)]="obj.cuota">
+            </div>
+            <div class="form-group col-md-2" style="top: 28px;">
+                <span (click)="removeFormGracePeriod(i, obj._id)" class="btn btn-primary">-</span>
+            
+            </div>
+        </div>
+        <span (click)="addGracePeriodForm()" class="btn btn-succes">Nuevo período</span>
+        <button class="btn btn-primary">Guardar</button>
+    </div>
+</form>
+<br>
+<br>
+<div class="container">
+<button class="btn btn-primary" (click)="Calculo()">
+    Ir al cálculo
+</button>
+</div>
+
+
+
+
+

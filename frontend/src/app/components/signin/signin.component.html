@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <div class="card">
+            <div class="card-header" style="background-color: #008CBC; color:white">
+                Iniciar sesión
+            </div>
+            <div class="card-body">
+                <form (submit)="signIn()" class="needs-validation" novalidate> 
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="user.email"  name="email" class="form-control" placeholder="Usuario" required="true" autofocus>
+                        <div class="invalid-feedback">
+                            Por favor ingrese un usuario
+                          </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Password" required="true">
+                        <div class="invalid-feedback">
+                            Por favor ingrese una contraseña
+                          </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Ingresar
+                    </button>
+
+                </form>
+
+                
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        {{userError}}
+    </div>
+</div>

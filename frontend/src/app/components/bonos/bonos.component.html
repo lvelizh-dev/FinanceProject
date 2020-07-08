@@ -1,0 +1,300 @@
+<!-- <div class="row">
+    <div class="col-md-4 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                Bonos
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div> -->
+<!-- {{ message }} -->
+
+
+
+<button type="button" data-toggle="tooltip" data-placement="top" title="Agregue un nuevo bono corporativo" [ngStyle]="{'color':getFontColor(selected1), 'background-color':getBackgroundColor(selected1)}" class="btn btn-primary" (click)="Select1()">Agregar bono</button>
+<button type="button" data-toggle="tooltip" data-placement="top" title="Revise sus bonos utilizados anteriormente" [ngStyle]="{'color':getFontColor(selected2), 'background-color':getBackgroundColor(selected2)}" class="btn btn-secondary" (click)="Select2()">Historial de bonos</button>
+<!-- <button type="button" [ngClass]="{'btn btn-primary':selected1 === true,'btn btn-secondary':selected1 === false}" (click)="Select1()">Agregar bono</button>
+<button type="button" [ngClass]="{'btn btn-primary':selected2 === true,'btn btn-secondary':selected2 === false}" (click)="Select2()">Historial de bonos</button> -->
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+  <ng-container *ngIf="this.selected1===true; else historial">
+    <form #bonoForm="ngForm" (ngSubmit)="addBono(bonoForm)" class="needs-validation" novalidate> 
+      <input type="hidden" name="_id" #id="ngModel" [(ngModel)] = "bonosService.selectedBono._id">
+      <div class="form-group row">
+      <label for="inputEmail3" data-toggle="tooltip" data-placement="top" title="Precio documentado del bono" class="col-sm-2 col-form-label">Valor nominal</label>
+      <div class="col-sm-3">
+        <input type="number" class="form-control" name="valorNominal" #valorNominal="ngModel" [(ngModel)]="bonosService.selectedBono.valorNominal" required="true">
+        <div class="invalid-feedback">
+          Por favor, ingrese un valor nominal
+        </div>
+        <div class="valid-feedback">
+          Bien!
+        </div>
+      </div>
+      
+      
+    </div>
+    <div class="form-group row">
+      <label for="inputPassword3" data-toggle="tooltip" data-placement="top" title="Precio real en el mercado del bono" class="col-sm-2 col-form-label">Valor comercial</label>
+      <div class="col-sm-3">
+        <input type="number" class="form-control" name="valorComercial" #valorComercial="ngModel" [(ngModel)]="bonosService.selectedBono.valorComercial" required="true">
+        <div class="invalid-feedback">
+          Por favor, ingrese un valor comercial
+        </div>
+        <div class="valid-feedback">
+          Bien!
+        </div>
+      </div>
+     
+      
+    </div>
+    <div class="form-group row">
+        <label for="inputPassword3" data-toggle="tooltip" data-placement="top" title="Duración total en años" class="col-sm-2 col-form-label">Número de años</label>
+        <div class="col-sm-3">
+          <input type="number" class="form-control" name="nroxAnos" #nroxAnos="ngModel" [(ngModel)]="bonosService.selectedBono.nroxAnos" required="true">
+          <div class="invalid-feedback">
+            Por favor, ingrese el número de años del bono
+          </div>
+          <div class="valid-feedback">
+            Bien!
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword3" data-toggle="tooltip" data-placement="top" title="Frecuencia de pago del bono" class="col-sm-2 col-form-label">Frecuencia de pago</label>
+        <div class="col-sm-3">
+        <select class="form-control" name="frecuenciaPago" #frecuenciaPago="ngModel" [(ngModel)]="bonosService.selectedBono.frecuenciaPago" required="true">
+          <option>Mensual</option>
+          <option>Bimestral</option>
+          <option>Trimestral</option>
+          <option>Cuatrimestral</option>
+          <option>Semestral</option>
+          <option>Anual</option>
+        </select>
+        <div class="invalid-feedback">
+          Por favor, seleccione la frecuencia de pago
+        </div>
+        <div class="valid-feedback">
+          Bien!
+        </div>
+      </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword3" data-toggle="tooltip" data-placement="top" title="Cantidad de días por año usados" class="col-sm-2 col-form-label">Días por año</label>
+        <div class="col-sm-3">
+          <select class="form-control" name="diasXAno" #diasXAno="ngModel" [(ngModel)]="bonosService.selectedBono.diasXAno" required="true">
+            <option>360</option>
+            <option>365</option>
+          </select>
+          <div class="invalid-feedback">
+            Por favor, seleccione el número de días por año
+          </div>
+          <div class="valid-feedback">
+            Bien!
+          </div>
+        </div>
+        <!-- <div class="col-sm-3">
+          <input type="text" class="form-control" name="diasXAno" #diasXAno="ngModel" [(ngModel)]="bonosService.selectedBono.diasXAno">
+        </div> -->
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword3" data-toggle="tooltip" data-placement="top" title="Tipo de Tasa de Intéres usada" class="col-sm-2 col-form-label">Tipo de tasa de interés</label>
+        <div class="col-sm-3">
+        <select class="form-control" name="tipoTasaInteres" #tipoTasaInteres="ngModel" [(ngModel)]="bonosService.selectedBono.tipoTasaInteres" required="true">
+          <option>Efectiva</option>
+          <option>Nominal</option>
+        </select>
+        <div class="invalid-feedback">
+          Por favor, ingresen el tipo de tasa de interés
+        </div>
+        <div class="valid-feedback">
+          Bien!
+        </div>
+      </div>
+        <!-- <div class="col-sm-3">
+          <input type="text" class="form-control" name="tipoTasaInteres" #tipoTasaInteres="ngModel" [(ngModel)]="bonosService.selectedBono.tipoTasaInteres">
+        </div> -->
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword3" data-toggle="tooltip" data-placement="top" title="Tipo de capitalizacion" class="col-sm-2 col-form-label">Capitalización</label>
+        <div class="col-sm-3">
+        <select class="form-control" name="capitalizacion" #capitalizacion="ngModel" [(ngModel)]="bonosService.selectedBono.capitalizacion" required="true">
+          <option>Diaria</option>
+          <option>Quincenal</option>
+          <option>Mensual</option>
+          <option>Bimestral</option>
+          <option>Trimestral</option>
+          <option>Cuatrimestral</option>
+          <option>Semestral</option>
+          <option>Anual</option>
+        </select>
+        <div class="invalid-feedback">
+          Por favor, seleccione la capitalización
+        </div>
+        <div class="valid-feedback">
+          Bien!
+        </div>
+        </div>
+        <!-- <div class="col-sm-3">
+          <input type="text" class="form-control" name="capitalizacion" #capitalizacion="ngModel" [(ngModel)]="bonosService.selectedBono.capitalizacion">
+        </div> -->
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword3" data-toggle="tooltip" data-placement="top" title="Porcentaje de la tasa de interés. Ej: 10% = 0.1" class="col-sm-2 col-form-label">Tasa de interés</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" name="tasaInteres" #tasaInteres="ngModel" [(ngModel)]="bonosService.selectedBono.tasaInteres">
+          <div class="invalid-feedback">
+            Por favor, ingrese la tasa de interés
+          </div>
+          <div class="valid-feedback">
+            Bien!
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword3" data-toggle="tooltip" data-placement="top" title="Porcentaje de la tasa anual de descuento. Ej: 1% = 0.01" class="col-sm-2 col-form-label">Tasa anual de descuento</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" name="tasaAnualDcto" #tasaAnualDcto="ngModel" [(ngModel)]="bonosService.selectedBono.tasaAnualDcto">
+          <div class="invalid-feedback">
+            Por favor, ingrese la tasa anual de descuento
+          </div>
+          <div class="valid-feedback">
+            Bien!
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword3" data-toggle="tooltip" data-placement="top" title="Porcentaje de Impuesto a la renta. Ej: 30% = 0.3" class="col-sm-2 col-form-label">Impuesto a la Renta</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" name="IRenta" #IRenta="ngModel" [(ngModel)]="bonosService.selectedBono.IRenta">
+          <div class="invalid-feedback">
+            Por favor, ingrese un valor de impuesto a la renta
+          </div>
+          <div class="valid-feedback">
+            Bien!
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword3" data-toggle="tooltip" data-placement="top" title="Fecha de la emisión del bono" class="col-sm-2 col-form-label">Fecha de Emisión</label>
+        <div class="col-sm-3">
+          <input type="date" class="form-control" name="fechaEmision" #fechaEmision="ngModel" [(ngModel)]="bonosService.selectedBono.fechaEmision" required="true">
+          <div class="invalid-feedback">
+            Por favor, indique la fecha de emisión
+          </div>
+          <div class="valid-feedback">
+            Bien!
+          </div>
+        </div>
+      </div>
+      <!-- <div class="form-group row" *ngIf="u_Type !=='2'"> -->
+        <div class="form-group row">
+        <label for="inputPassword3" data-toggle="tooltip" data-placement="top" title="Frecuencia de pago del bono" class="col-sm-2 col-form-label">Bonistas</label>
+        <div class="col-sm-3">
+        <select class="custom-select" name="bonistas_ids" #bonistas_ids="ngModel" [(ngModel)]="bonosService.selectedBono.bonistas_ids" multiple>
+         <option *ngFor="let bonista of authService.users" [value]="bonista._id" >{{bonista.email}}</option>
+        </select>
+      </div>
+      </div>
+      <!-- bonistas_ids -->
+      <!-- <select class="custom-select" multiple>
+        <option selected>Open this select menu</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select> -->
+
+      <p>
+        <button data-toggle="tooltip" data-placement="top" title="Ingrese opciones adicionales para su bono" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+          Opciones adicionales
+        </button>
+      </p>
+        <div class="collapse" id="collapseExample">
+            <!-- <div class="card card-body"> -->
+      
+
+      <div class="form-group row">
+        <label for="inputPassword3" data-toggle="tooltip" data-placement="top" title="Porcentaje de la prima" class="col-sm-2 col-form-label">% Prima</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" name="porcentajePrima" #porcentajePrima="ngModel" [(ngModel)]="bonosService.selectedBono.porcentajePrima">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword3" data-toggle="tooltip" data-placement="top" title="Porcentaje de estructuración" class="col-sm-2 col-form-label">% Estructuración</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" name="porcentajeEstructuracion" #porcentajeEstructuracion="ngModel" [(ngModel)]="bonosService.selectedBono.porcentajeEstructuracion">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword3" data-toggle="tooltip" data-placement="top" title="Porcentaje de colocación" class="col-sm-2 col-form-label">% Colocación</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" name="porcentajeColocacion" #porcentajeColocacion="ngModel" [(ngModel)]="bonosService.selectedBono.porcentajeColocacion">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword3" data-toggle="tooltip" data-placement="top" title="Porcentaje de flotación" class="col-sm-2 col-form-label">% Flotación</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" name="porcentajeFlotacion" #porcentajeFlotacion="ngModel" [(ngModel)]="bonosService.selectedBono.porcentajeFlotacion">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputPassword3" data-toggle="tooltip" data-placement="top" title="Porcentaje de CAVALI" class="col-sm-2 col-form-label">% CAVALI</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" name="porcentajeCavali" #porcentajeCavali="ngModel" [(ngModel)]="bonosService.selectedBono.porcentajeCavali">
+        </div>
+      </div>
+
+    <!-- </div> -->
+</div>
+
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <button type="submit" class="btn btn-primary">Siguiente</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <label *ngIf="user2AlertBool">{{user2Alert}}</label>
+    </div>
+  </div>
+  
+  </ng-container>
+  <ng-template #historial>
+  <div class="col s7">
+    <table class="table">
+        <thead style="background-color: #008cba; color: white;">
+            <th>Valor nominal</th>
+            <th>Valor comercial</th>
+            <th>Número de años</th>
+            <th>Opciones</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let bonito of bonosService.bonos">
+                <td>{{ bonito.valorNominal }}</td>
+                <td>{{ bonito.valorComercial }}</td>
+                <td>{{ bonito.nroxAnos }}</td>
+
+                <td>
+                    <a (click)="editBono(bonito)"><i class="material-icons">edit</i></a>
+                    <a (click)="deleteBono(bonito._id)"><i class="material-icons">delete</i></a>
+                </td>
+
+            </tr>
+            
+        </tbody>
+    </table>
+    </div>
+  </ng-template>
+

@@ -1,0 +1,110 @@
+
+<div id="customers">
+    <table class="table">
+        <thead style="background-color: #008cba; color: white;">
+        <tr>
+            <th>NC</th>
+            <th>FchCupon</th>
+            <th>IAnual</th>
+            <th>IPeríodo</th>
+            <th>PG</th>
+            <th>Bono {{coin}}</th>
+            <th>BonoInf {{coin}}</th>
+            <th>Cupon {{coin}}</th>
+            <th>Cuota {{coin}}</th>
+            <th>Amort {{coin}}</th>
+            <th>Prima {{coin}}</th>
+            <th>Escudo {{coin}}</th>
+            <th>F.E {{coin}}</th>
+            <th>F.E c/ Esc {{coin}}</th>
+            <th>F.Bonista {{coin}}</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let flujo of flujos">
+                <td>{{ flujo.numero }}</td>
+                <td>{{ flujo.fechaPago }}</td>
+                <td>{{ flujo.inflacionAnualString }}</td>
+                <td>{{ flujo.inflacionPeriodoString }}</td>
+                <td>{{ flujo.plazoGracia }}</td>
+                <td>{{ flujo.bonoString }}</td>
+                <td>{{ flujo.bonoIndexadoString }}</td>
+                <td>{{ flujo.cuponInteresString }}</td>
+                <td>{{ flujo.cuotaString }}</td>
+                <td>{{ flujo.amortString }}</td>
+                <td>{{ flujo.primaString }}</td>
+                <td>{{ flujo.escudoString }}</td>
+                <td>{{ flujo.flujoEmisorString }}</td>
+                <td>{{ flujo.flujoEmisorCEscudoString }}</td>
+                <td>{{ flujo.flujoBonistaString}}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<div id="tcea">
+    <table class="table">
+        <thead style="background-color: #008cba; color: white;">
+        <tr>
+            <th>Frec</th>
+            <th>DiasCap</th>
+            <th>NCxA</th>
+            <th>N</th>
+            <th>TEA</th>
+            <th>TEP</th>
+            <th>COKP</th>
+            <th>CIEmisor</th>
+            <th>CIBonista</th>
+            <th>PActual</th>
+            <th>U/P</th>
+            <th>TCEAEmi</th>
+            <th>TCEAEmi c/e</th>
+            <th>TREABonista</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr >
+                <td>{{ tcea.frecuenciaCupon }}</td>
+                <td>{{ tcea.diasCapitalizacion }}</td>
+                <td>{{ tcea.nroPeriodosXAno }}</td>
+                <td>{{ tcea.nroTotalPeriodos }}</td>
+                <td>{{ tcea.tasaEfectivaAnualString }}</td>
+                <td>{{ tcea.tasaEfectivaPeriodoString }}</td>
+                <td>{{ tcea.cokPeriodoString }}</td>
+                <td>{{ tcea.costesInicialesEmisor }}</td>
+                <td>{{ tcea.costesInicialesBonista }}</td>
+                <td>{{ tcea.precioActualString }}</td>
+                <td>{{ tcea.utilidadPerdidaString }}</td>
+                <td>{{ tcea.tceaEmisorString }}</td>
+                <td>{{ tcea.tceaEmisorCEscudoString }}</td>
+                <td>{{ tcea.treaBonistaString }}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+
+<button id="cmd" onclick="demoFromHTML()">Descargar PDF</button> 
+<br>
+<br>
+<button id="cmd" onclick="demoFromHTMLTCEA()">Descargar PDF TCEA</button> 
+
+<br>
+
+<!-- <script type="text/javascript">
+    $("#pdf").on("click", function(){
+        $("example").tableHTMLExport({
+            type: 'pdf',
+            filename: 'sample.pf'
+        });
+    });
+    </script>
+     -->
+
